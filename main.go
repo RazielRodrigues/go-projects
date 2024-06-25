@@ -7,6 +7,10 @@ import (
 	"github.com/gdamore/tcell"
 )
 
+/*
+	Reference https://betterprogramming.pub/build-a-snake-game-using-in-go-b4186e21d011
+*/
+
 func main() {
 	screen, err := tcell.NewScreen()
 
