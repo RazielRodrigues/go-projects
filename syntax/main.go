@@ -63,4 +63,23 @@ func main() {
 	A variable name cannot contain spaces
 	The variable name cannot be any Go keywords */
 
+
+	// CONSTANTS
+
+	// declared
+	const PI float32 = 3.14
+
+	// will guess
+	const CEP = 111
+
+	const (
+		A string = "A"
+		B int = 2
+	)
+
+	fmt.Print(PI)
+	fmt.Printf("PI %v and %T" , PI, PI )
+
+	fmt.Print(A, ' ', B)
+
 }
