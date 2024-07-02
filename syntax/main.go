@@ -22,9 +22,7 @@ func familyName(fname string, age int) {
 	fmt.Println("Hello", age, "year old", fname, "Refsnes")
 }
 
-/* Multiple Return Values
- */
-
+/* Multiple Return Values */
 func myFunction(x int, y string) (result int, txt1 string) {
 	result = x + x
 	txt1 = y + " World!"
@@ -77,15 +75,17 @@ func main() {
 
 	fmt.Println(age, fly, age2, money, name, adult, experience, rice, beans, salad, drink, meal, xp)
 
-	/* 	Go variable naming rules:
+	/*
+			Go variable naming rules:
 
-	   	A variable name must start with a letter or an underscore character (_)
-	   	A variable name cannot start with a digit
-	   	A variable name can only contain alpha-numeric characters and underscores (a-z, A-Z, 0-9, and _ )
-	   	Variable names are case-sensitive (age, Age and AGE are three different variables)
-	   	There is no limit on the length of the variable name
-	   	A variable name cannot contain spaces
-	   	The variable name cannot be any Go keywords */
+		   	A variable name must start with a letter or an underscore character (_)
+		   	A variable name cannot start with a digit
+		   	A variable name can only contain alpha-numeric characters and underscores (a-z, A-Z, 0-9, and _ )
+		   	Variable names are case-sensitive (age, Age and AGE are three different variables)
+		   	There is no limit on the length of the variable name
+		   	A variable name cannot contain spaces
+		   	The variable name cannot be any Go keywords
+	*/
 
 	// CONSTANTS
 
@@ -134,7 +134,8 @@ func main() {
 		%#x	Base 16, with leading 0x
 		%4d	Pad with spaces (width 4, right justified)
 		%-4d	Pad with spaces (width 4, left justified)
-		%04d	Pad with zeroes (width 4 */
+		%04d	Pad with zeroes (width 4
+	*/
 	var i2 = 15
 
 	fmt.Printf("%b\n", i2)
@@ -155,7 +156,8 @@ func main() {
 	   %8s	Prints the value as plain string (width 8, right justified)
 	   %-8s	Prints the value as plain string (width 8, left justified)
 	   %x	Prints the value as hex dump of byte values
-	   % x	Prints the value as hex dump with spaces */
+	   % x	Prints the value as hex dump with spaces
+	*/
 	fmt.Printf("%s\n", txt)
 	fmt.Printf("%q\n", txt)
 	fmt.Printf("%8s\n", txt)
@@ -168,7 +170,8 @@ func main() {
 	   %f	Decimal point, no exponent
 	   %.2f	Default width, precision 2
 	   %6.2f	Width 6, precision 2
-	   %g	Exponent as needed, only necessary digits */
+	   %g	Exponent as needed, only necessary digits
+	*/
 	fmt.Printf("%e\n", i)
 	fmt.Printf("%f\n", i)
 	fmt.Printf("%.2f\n", i)
