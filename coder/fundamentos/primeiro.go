@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math"
+	"reflect"
+	"strconv"
 	/*
 		_ m "math"
 		atalho e forma d eperder o importe
@@ -36,6 +38,12 @@ func main() {
 	fmt.Print(a, b, r, c, e, f, g, h, i)
 
 	/* 		concatena
-	 */fmt.Println("ggggg", g)
+	 */
+	str := "true"
 
+	parsed, _ := strconv.ParseBool(str)
+	fmt.Println("ggggg", reflect.TypeOf(g))
+	fmt.Println("ggggg", len(h))
+	fmt.Println("ggggg" + h)
+	fmt.Println("e o que", parsed)
 }

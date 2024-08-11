@@ -33,3 +33,8 @@ sao como uma bilblioteca de musica por exemplo vocer organiza pelas pastas o gen
         var ()
         const 
         var
+         reflect.TypeOf(g)
+         float64 é padrao
+         fortemente tipada
+         so string com ""
+         
