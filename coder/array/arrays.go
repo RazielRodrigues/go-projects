@@ -4,6 +4,7 @@ import "fmt"
 
 func main() {
 	notas()
+	pedacoes()
 }
 
 func notas() {
@@ -18,4 +19,20 @@ func notas() {
 	media := total / float64((len(notas)))
 
 	fmt.Println("Media: ", media)
+}
+
+func pedacoes() {
+
+	var numeros = [...]int{1, 2, 3, 4, 5}
+
+	// EQUIVALENTE FOR EACH
+	for index, valor := range numeros {
+		println(index, valor)
+	}
+	for index, _ := range numeros {
+		println(index)
+	}
+	for sopegaoindex := range numeros {
+		println(sopegaoindex)
+	}
 }
