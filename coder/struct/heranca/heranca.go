@@ -2,8 +2,12 @@ package main
 
 import "fmt"
 
+// conseguimos definir um tipo
+type dinheiro float64
+
 type pessoa struct {
 	name string
+	dinheiro
 }
 
 type superpessoa struct {
@@ -14,5 +18,7 @@ type superpessoa struct {
 func main() {
 	sp := superpessoa{power: "raziel"}
 	sp.name = "Jaiara"
-	fmt.Println(sp.name)
+	sp.dinheiro = 1000.0
+
+	fmt.Println(sp.name, sp.dinheiro)
 }
