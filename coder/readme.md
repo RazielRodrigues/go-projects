@@ -1,5 +1,7 @@
 # Conceitos
 
+go mod init heranca
+
 go env para saber as varaiveis de ambiente
 
 GOROOT=C:\Program Files\Go -- essa é a pasta do go (nao é aconselhado mudar)
