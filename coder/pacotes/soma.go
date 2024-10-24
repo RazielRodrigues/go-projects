@@ -7,3 +7,5 @@ func Soma(a, b int) int {
 func exibir() {
 	Soma(2, 3)
 }
+
+// TODO ESTUDAR NOVAMENTE ISSO COM A VERSAO MAIS ATUALIZADA
