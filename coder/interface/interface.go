@@ -50,6 +50,33 @@ func (f *ferrari) ligarTurbo() {
 	f.turboLigado = true
 }
 
+/* parte 3 */
+type luxooso interface {
+	ligarTurbo()
+}
+
+type esportivoBom interface {
+	baliza()
+}
+
+type esportivoLuxo interface {
+	esportivoBom
+	luxooso
+
+	/* 	mais metodos
+	 */
+}
+
+type BM2 struct{}
+
+func (b BM2) ligarTurbo() {
+	fmt.Println("Turbo ligado")
+}
+
+func (b BM2) baliza() {
+	fmt.Println("Baliza ligada")
+}
+
 func main() {
 	var coisa imprimivel = pessoa{"Raziel", "Rodrigues"}
 	fmt.Println(coisa.toString())
@@ -66,4 +93,9 @@ func main() {
 	carro2.ligarTurbo()
 
 	fmt.Println(carro1, carro2)
+
+	var BM2 esportivoLuxo = BM2{}
+	BM2.ligarTurbo()
+	BM2.baliza()
+
 }
