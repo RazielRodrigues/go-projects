@@ -12,25 +12,66 @@ func fale(pessoa, texto string, qtde int) {
 	}
 }
 
-func main() {
+func hablar(letra string, c chan string) {
 
-	/* 	Adicionando a palavra go voce cria uma funcao que roda
-	   	indepente ou seja de forma assincrona, entretanto ela
-	   	depende do fluxo principal do programa, se o fluxo termnia
-	   	o programa nao vai esperar a execucação completa da go function */
+	c <- letra
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+
+	c <- letra + " 2"
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+
+	c <- letra + " 3"
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+
+	c <- letra + " 31111"
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+	time.Sleep(time.Second)
+
+}
+
+func falando() {
 
 	fale("João", "Pq vc não fala comigo?", 1) // funcao sincrona
 	go fale("Maria", "Aaah", 2)                 // funcao assincrona
 	fale("João", "Pq vc não fala comigo?", 3) // funcao sincrona
 
-	/* 	os canais sao tipos de uma variavel em go assim como o tipo inteiro ou string
-	   	os canais recebem dados e criam ligações que voce consegue buscar o resultado
-	   	de algo
-	*/
-
 	ch1 := make(chan string, 1) // canal de string
 
 	ch1 <- "Ola"
 	fmt.Println(<-ch1)
+}
+
+func main() {
+
+	c := make(chan string)
+
+	go hablar("FALA AI JAO", c)
+	go fale("Maria", "Aaah", 30) // funcao assincrona
+
+	a, b := <-c, <-c
+	fmt.Println(a, b)
+
+	fmt.Println("Fim!")
+	fmt.Println(<-c)
+
+	fmt.Println("QUASE LA e o Fim!")
+
+	fmt.Println(<-c)
+
+	fmt.Println("agora e o Fim!")
 
 }
