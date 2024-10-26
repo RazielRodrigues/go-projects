@@ -3,7 +3,9 @@ package soma
 import "testing"
 
 func TestSoma(t *testing.T) {
-	t.Parallel()
+	/* 	t.Parallel()
+	   	t.Skip()
+	   	t.Fail() */
 	dataset := []struct {
 		a        int
 		b        int
