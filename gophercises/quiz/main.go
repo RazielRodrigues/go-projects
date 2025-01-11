@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 type problem struct {
@@ -16,6 +17,7 @@ type problem struct {
 func main() {
 
 	csvFileName := flag.String("csv", "problems.csv", "A csv file for the quiz: question,answer")
+	timeLimit := flag.Int("limit", 5, "time limit")
 	flag.Parse()
 
 	file, err := os.Open(*csvFileName)
@@ -30,27 +32,31 @@ func main() {
 		exit("Not possible to read the data")
 	}
 
-	questions := parseCsv(data)
-	score := checkAnswer(questions)
-
-	fmt.Printf("You scored %d out of %d", score, len(questions))
-}
-
-func checkAnswer(questions []problem) int {
 	correct := 0
+	questions := parseCsv(data)
+	timer := time.NewTimer(time.Duration(*timeLimit) * time.Second)
 
+problemloop:
 	for i, p := range questions {
 		fmt.Printf("Question #%d: %s = \n", i+1, p.q)
-
-		var answer string
-		fmt.Scanf("%s\n", &answer)
-
-		if answer == p.a {
-			correct++
+		answerCh := make(chan string)
+		go func() {
+			var answer string
+			fmt.Scanf("%s\n", &answer)
+			answerCh <- answer
+		}()
+		select {
+		case <-timer.C:
+			fmt.Println()
+			break problemloop
+		case answer := <-answerCh:
+			if answer == p.a {
+				correct++
+			}
 		}
 	}
 
-	return correct
+	fmt.Printf("You scored %d out of %d", correct, len(questions))
 }
 
 func parseCsv(data [][]string) []problem {
