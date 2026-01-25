@@ -109,7 +109,6 @@ func (a *AOF) Replay(ctx context.Context, store repository.KeyValueRepository, a
 			}
 			store.Del(ctx, args[0])
 		default:
-			return nil
 		}
 	}
 
