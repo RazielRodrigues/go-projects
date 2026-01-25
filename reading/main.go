@@ -85,6 +85,7 @@ func valores() {
 	switch a.(type) {
 	case int:
 		fmt.Println(1)
+
 	case string:
 		fmt.Println(2)
 	}
@@ -128,6 +129,16 @@ func valores() {
 }
 
 func testeFunc(n int) int {
+	// switch fallthrough vai pra proxima mesmo que seja verdade
+	sss := 12
+	switch sss {
+	case 12:
+		fallthrough
+	case 11:
+		fmt.Print(12)
+	default:
+		fmt.Println("reto")
+	}
 	return 1
 }
 
