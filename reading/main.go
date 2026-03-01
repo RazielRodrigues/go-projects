@@ -1,9 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 	"unicode"
 	"unicode/utf8"
@@ -128,6 +126,14 @@ func valores() {
 	fmt.Println(sl)
 }
 
+type Recebedor struct {
+	valor int
+}
+
+func (r Recebedor) contar() {
+	r.valor++
+}
+
 func testeFunc(n int) int {
 	// switch fallthrough vai pra proxima mesmo que seja verdade
 	sss := 12
@@ -142,20 +148,83 @@ func testeFunc(n int) int {
 	return 1
 }
 
-func masterFunction() string {
-	valores()
-	runas()
-	response := "ok"
-	return response
+type Robo struct {
+	Nome    string
+	Bateria int
+}
+
+func (r *Robo) Carregar() {
+	r.Bateria = 100
+}
+
+func (r Robo) Dados() {
+	fmt.Printf("Robo %s: %v", r.Nome, r.Bateria)
+}
+
+func (r *Robo) Resetar() {
+	r.Bateria = 0
+}
+
+type Reparavel interface {
+	Resetar()
+}
+
+func Consertar(r Reparavel) {
+	r.Resetar()
+}
+
+type Limpar interface {
+	Agua()
+}
+
+type Sujar interface {
+	Barro()
+}
+
+type TodoDia interface { // compondo duas interface
+	Limpar
+	Sujar
+}
+
+func masterFunction() {
+
+	rec := Robo{
+		Nome:    "RZ",
+		Bateria: 12,
+	}
+
+	type RoboDoido struct {
+		Robo         // assim como eu faco embed de interface eu tbm faco de struct
+		nomeVariavel string
+	}
+
+	// fazendo type assertion quando declara como interface{} ou any
+	var assertion any = "string"
+	value, ok := assertion.(string)
+	if ok {
+		fmt.Println(value)
+	}
+
+	// usando type assertion junto com um switch
+	switch v := assertion.(type) {
+	case int:
+		fmt.Println(v)
+	}
+
+	Consertar(&rec)
+	rec.Dados()
 }
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
+	masterFunction()
+	/*
+		 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set("Content-Type", "application/json")
 
-		p := masterFunction()
-		json.NewEncoder(w).Encode(p)
-	})
-	fmt.Println("listening: http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+				p := masterFunction()
+				json.NewEncoder(w).Encode(p)
+			})
+			fmt.Println("listening: http://localhost:8080")
+			http.ListenAndServe(":8080", nil)
+	*/
 }
