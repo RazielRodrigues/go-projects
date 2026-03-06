@@ -1,0 +1,47 @@
+package usecase
+
+import (
+	"context"
+	"fmt"
+	"kv-store/internal/domain/repository"
+	"sync/atomic"
+	"time"
+)
+
+type Stats struct {
+	startTime       time.Time
+	totalCommands   int64
+	totalConections int64
+	keyspace        repository.KeyValueRepository
+}
+
+func NewStats(keyspace repository.KeyValueRepository) *Stats {
+	return &Stats{
+		startTime: time.Now(),
+		keyspace:  keyspace,
+	}
+}
+
+func (s *Stats) IncrementCommads() {
+	atomic.AddInt64(&s.totalCommands, 1)
+}
+
+func (s *Stats) IncrementConections() {
+	atomic.AddInt64(&s.totalConections, 1)
+}
+
+func (s *Stats) GetInfo(ctx context.Context) string {
+	uptime := time.Since(s.startTime).Seconds()
+	commands := atomic.LoadInt64(&s.totalCommands)
+	connections := atomic.LoadInt64(&s.totalConections)
+	dbSize := s.keyspace.Size(ctx)
+
+	info := fmt.Sprintf(`
+		uptime: %v
+		commands: %v
+		connections: %v
+		size: %v
+	`, uptime, commands, connections, dbSize)
+
+	return info
+}
