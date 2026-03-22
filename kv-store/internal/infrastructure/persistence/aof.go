@@ -50,7 +50,7 @@ func (a *AOF) Append(ctx context.Context, command string, args []string) error {
 	return a.file.Sync()
 }
 
-func (a *AOF) Replay(ctx context.Context, store repository.KeyValueRepository, args []string) error {
+func (a *AOF) Replay(ctx context.Context, store repository.KeyValueRepository) error {
 	if ctx.Err() != nil {
 		return ctx.Err()
 	}
